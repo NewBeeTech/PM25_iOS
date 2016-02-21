@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -17,7 +18,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+//    NSString *htmlFileString = [NSString stringWithContentsOfFile:htmlFile encoding: NSUTF8StringEncoding error:nil];
+//    NSString *bundleJS= [[NSBundle mainBundle] pathForResource:@"bundle" ofType:@"js"];
+//    NSString *bundleJSString = [NSString stringWithContentsOfFile:bundleJS encoding:NSUTF8StringEncoding error:nil];
+//    
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.chenkexin94.com"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
+    
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(error);
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
